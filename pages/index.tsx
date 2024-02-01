@@ -6,17 +6,19 @@ const HomePage: React.FC = () => {
     <div className="flex flex-col items-center text-center">
 
       {/* Section 1: Welcome */}
-      <section id="welcome" className="flex flex-col items-center justify-center h-screen">
+      <section id="home" className="bg-white flex flex-col items-center justify-center h-screen w-full">
         <h1 className="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
       </section>
 
-      {/* Section 2: About Me */}
-      <section id="about" className="flex flex-col justify-center bg-gray-100 mt-0">
+       {/* Section 2: About Me */}
+       <section id="about" className="flex flex-col justify-start bg-white h-screen w-full"> {/* Adjusted styles */}
+       <div className='container mt-40'>
         <h2 className="text-2xl font-bold mb-2">About Me</h2>
         <p>
           Hello! I am [Your Name], a passionate developer with a focus on [your expertise]. 
           [Add a brief introduction about yourself]
         </p>
+        </div>
       </section>
 
       {/* Section 3: Skills */}
@@ -48,6 +50,14 @@ const HomePage: React.FC = () => {
         <h2 className="text-2xl font-bold mb-2">Blog</h2>
         <p>Check out my latest blog posts:</p>
         <p>View Blog</p>
+      </section>
+
+      <section id="contact" className="flex flex-col justify-center bg-gray-100 mt-0">
+        <h2 className="text-2xl font-bold mb-2">Contact Me</h2>
+        <p>
+          Hello! I am [Your Name], a passionate developer with a focus on [your expertise]. 
+          [Add a brief introduction about yourself]
+        </p>
       </section>
 
     </div>
