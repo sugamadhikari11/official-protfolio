@@ -1,15 +1,18 @@
-// pages/projects.tsx
+// BlogPage.tsx
 import React from 'react';
-import MainLayout from '../app/layouts/MainLayout';
+import { allBlogs } from "contentlayer/generated";
+import BlogScreen from '@/app/components/blog_screen';
+import BlogFeatured from '@/app/components/blog_feature';
+import { Blog } from 'contentlayer/generated'; // Import Blog type using shortcut
 
 const BlogPage: React.FC = () => {
+  console.log(allBlogs);
   return (
-    
-      <div>
-        <h1>My Projects</h1>
-        <p>This is the projects page content.</p>
-      </div>
-    
+    <div>
+      {/* Pass allBlogs as a prop to BlogScreen */}
+      <BlogScreen blogs={allBlogs as Blog[]} />
+      <BlogFeatured/>
+    </div>
   );
 };
 

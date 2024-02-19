@@ -1,19 +1,25 @@
 // pages/_app.tsx
 import React from 'react';
 import MainLayout from '../app/layouts/MainLayout';
+
 import '../styles/tailwind.css'; // Include global styles if you have any
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
 
 interface MyAppProps {
   Component: React.ComponentType;
   pageProps: any; // You might want to define a more specific type for pageProps
 }
 
-const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
+    <ThemeProvider 
+    attribute="class"> 
+      <MainLayout >
+        <Component  {...pageProps} />
+      </MainLayout>
+    </ThemeProvider>
   );
 };
 
-export default MyApp;
+

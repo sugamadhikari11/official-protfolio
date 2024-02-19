@@ -1,6 +1,8 @@
-import type { Config } from 'tailwindcss'
+/** @type {import('tailwindcss').Config} */
+module.exports = {
 
-const config: Config = {
+  darkMode: 'class',
+
   content: [
     "./app/**/*.tsx",
     "./app/**/*.ts",
@@ -9,13 +11,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        dark: "#181414",
+        light: "#fff",
+        accent: "#7B00D3", 
+        accentDark: "#ffdb4d",
+        gray: "#747474",
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        // You can add other font families similarly
+        // serif: ['Georgia', 'serif'],
+        // mono: ['Menlo', 'monospace'],
       },
     },
   },
   plugins: [],
 }
-export default config
