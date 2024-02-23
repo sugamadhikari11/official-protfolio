@@ -11,7 +11,7 @@ interface MyAppProps {
   pageProps: any; // You might want to define a more specific type for pageProps
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: MyAppProps) {
   return (
     <ThemeProvider 
     attribute="class"> 

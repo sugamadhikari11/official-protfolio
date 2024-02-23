@@ -12,11 +12,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dark: "#181414",
+        dark: "#121212",
         light: "#fff",
         accent: "#7B00D3", 
         accentDark: "#ffdb4d",
         gray: "#747474",
+        crimson: "#DC143C",
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -24,7 +25,14 @@ module.exports = {
         // serif: ['Georgia', 'serif'],
         // mono: ['Menlo', 'monospace'],
       },
+      screens:{
+        sxl:"1180px",
+        xs: "480px",
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+  ],
 }

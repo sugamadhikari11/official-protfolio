@@ -4,15 +4,16 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useRouter } from 'next/router';
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaSearch, FaSun, FaRegMoon } from "react-icons/fa";
 import { useTheme } from 'next-themes';
-
+import Image from 'next/image';
 
 interface HeaderLinkProps {
   href: string;
   sectionId: string;
   children: React.ReactNode;
+  closeMenu: () => void; // Callback function to close the menu
 }
 
-const HeaderLink: React.FC<HeaderLinkProps> = ({ href, sectionId, children }) => {
+const HeaderLink: React.FC<HeaderLinkProps> = ({ href, sectionId, children, closeMenu }) => {
   const router = useRouter();
 
   const scrollToSection = () => {
@@ -25,10 +26,12 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({ href, sectionId, children }) =>
           targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
+      closeMenu(); // Close the menu after scrolling
     });
 
     if (router.pathname === '/' && sectionId === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      closeMenu(); // Close the menu if on home page
     }
 
     router.push(href);
@@ -44,11 +47,9 @@ const HeaderLink: React.FC<HeaderLinkProps> = ({ href, sectionId, children }) =>
 const Header: React.FC = () => {
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
   const [hamBurger, setHamBurger] = useState(false);
-  const { theme, setTheme } = useTheme()
-
+  const { theme, setTheme } = useTheme();
 
   const router = useRouter();
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,67 +71,74 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  const closeMenu = () => {
+    setHamBurger(false);
+  };
+
   const navItems = [
     { href: '/', sectionId: 'home', label: 'Home' },
     { href: '/', sectionId: 'about', label: 'About' },
     { href: '/', sectionId: 'skills', label: 'Skills' },
+    { href: '/', sectionId: 'project', label: 'Projects' },
     { href: '/', sectionId: 'contact', label: 'Contact' },
-    { href: '/project', sectionId: 'project', label: 'Projects' },
     { href: '/blog', sectionId: 'blog', label: 'Blog' },
   ];
 
   return (
-    <header className={`p-4 ${isHeaderFixed ? 'fixed top-0 left-0 w-full z-50 shadow-md' : ''} ${theme === 'dark' ? 'bg-dark' : 'bg-light'}`}>
+    <header className={`px-9 py-3 ${isHeaderFixed ? 'fixed top-0 left-0 w-full z-50 shadow-md' : ''} ${theme === 'dark' ? 'bg-dark' : 'bg-light'}`}>
       <nav className="flex items-center justify-between">
-        <div className="text-xl font-bold cursor-pointer px-4">
-          <HeaderLink href="/" sectionId="home">My Portfolio</HeaderLink>
-        </div>
+      <HeaderLink href="/" sectionId="home" closeMenu={closeMenu}>
+      <div className="flex items-center text-xl font-bold cursor-pointer"> {/* Added flex container */}
+      <img src="hero.png" alt="Logo" className="mr-2 w-12 h-12 border-2 border-solid rounded-full" />
+      <h2>Sugam Adhikari</h2>
+    </div>
+      </HeaderLink>
+
         <ul className="hidden md:flex">
           {navItems.map((item, index) => (
             <li key={index} className='px-4'>
               {item.href.startsWith('/') ? (
                 <Link href={item.href}>
-                  <HeaderLink href={item.href} sectionId={item.sectionId}>
+                  <HeaderLink href={item.href} sectionId={item.sectionId} closeMenu={closeMenu}>
                     {item.label}
                   </HeaderLink>
                 </Link>
               ) : (
-                <HeaderLink href={item.href} sectionId={item.sectionId}>
+                <HeaderLink href={item.href} sectionId={item.sectionId} closeMenu={closeMenu}>
                   {item.label}
                 </HeaderLink>
               )}
             </li>
           ))}
-           <button className="block py-2 pl-3 pr-4 rounded md:p-0" onClick={()=> setTheme( theme === "dark"? "light": "dark" )}>
-              { theme==="dark"? <FaSun/>: <FaRegMoon/> }
-              </button>
+          <button className="block py-2 pl-3 pr-4 mx-5 rounded md:p-0" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            {theme === "dark" ? <FaSun /> : <FaRegMoon />}
+          </button>
         </ul>
-        <div onClick={()=>setHamBurger(!hamBurger)} className='cursor-pointer pr-4 text-gray-700 z-20 md:hidden'>
-          {hamBurger ? <FaTimes size={30}/> : <FaBars size={30}/>}
+        <div onClick={() => setHamBurger(!hamBurger)} className='cursor-pointer pr-2 text-gray-700 z-50 md:hidden'>
+          {hamBurger ? <FaTimes size={30} /> : <FaBars size={30} />}
         </div>
 
         {hamBurger && (
-          <ul className={`flex flex-col justify-center items-center absolute top-0 left-0 z-10 w-full h-screen ${theme === 'dark' ? 'bg-dark' : 'bg-light'}`}>
+          <ul className={`flex flex-col justify-center items-center absolute top-0 left-0 z-30 w-full h-screen ${theme === 'dark' ? 'bg-dark' : 'bg-light'}`}>
             {navItems.map((item, index) => (
               <li key={index} className='px-4 cursor-pointer capitalize py-3 text-2xl'>
                 {item.href.startsWith('/') ? (
                   <Link href={item.href}>
-                    <HeaderLink href={item.href} sectionId={item.sectionId}>
+                    <HeaderLink href={item.href} sectionId={item.sectionId} closeMenu={closeMenu}>
                       {item.label}
                     </HeaderLink>
                   </Link>
                 ) : (
-                  <HeaderLink href={item.href} sectionId={item.sectionId}>
+                  <HeaderLink href={item.href} sectionId={item.sectionId} closeMenu={closeMenu}>
                     {item.label}
                   </HeaderLink>
                 )}
-                
+
               </li>
-              
             ))}
-             <button className="block py-2 pl-3 pr-4 rounded md:p-0" onClick={()=> setTheme( theme === "dark"? "light": "dark" )}>
-              { theme==="dark"? <FaSun/>: <FaRegMoon/> }
-              </button>
+            <button className="block py-2 pl-3 pr-4 rounded md:p-0" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+              {theme === "dark" ? <FaSun /> : <FaRegMoon />}
+            </button>
 
           </ul>
         )}
