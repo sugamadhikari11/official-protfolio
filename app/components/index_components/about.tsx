@@ -3,7 +3,7 @@ import Image from 'next/image'; // Import Next.js Image component
 
 const AboutPage: React.FC = () => {
   return (
-    <section className="py-16 mt-15 px-4 sm:px-6 lg:px-8">
+    <div className="py-16 mt-15 px-2 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto flex flex-col items-center justify-center space-y-8">
         <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">About Me</h2>
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-y-8 sm:space-x-8">
@@ -25,14 +25,16 @@ const AboutPage: React.FC = () => {
                 development. You can checkout my Projects and skills available below.
             </p>
             <div className='flex flex-col mt-10 items-center'>
-            <button className="item-center bg-transparent hover:bg-crimson py-2 px-8 border border-crimson hover:border-transparent squared">
-                Download Resume
+            <a href="profile.pdf" download="profile.pdf">
+                <button className="bg-transparent hover:bg-crimson py-2 px-8 border border-crimson hover:border-transparent">
+                    Download Resume
                 </button>
+            </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

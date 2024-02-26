@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGithub, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
@@ -34,10 +35,18 @@ const Footer: React.FC = () => {
         />
       </form>
       <div className="flex space-x-4 text-xl mb-4">
+        <Link href={'https://github.com/sugamadhikari11'} target={'_blank'}>
         <FaGithub className="hover:text-gray-500 hover:scale-125 cursor-pointer transition-transform duration-300" />
+        </Link>
+        <Link href={'https://www.facebook.com/'} target={'_blank'}>
         <FaFacebook className="hover:text-gray-500 hover:scale-125 cursor-pointer transition-transform duration-300" />
+        </Link>
+        <Link href={'https://www.linkedin.com/feed/?trk=404_page'} target={'_blank'}>
         <FaLinkedin className="hover:text-gray-500 hover:scale-125 cursor-pointer transition-transform duration-300" />
+        </Link>
+        <Link href={'https://www.instagram.com/sugam5152/?hl=en'} target={'_blank'}>
         <FaInstagram className="hover:text-gray-500 hover:scale-125 cursor-pointer transition-transform duration-300" />
+        </Link>
       </div>
       <div className="w-full border-t border-light text-center mt-8 font-medium py-6 text-sm text-gray-500 ">© 2024 SugamAdhikari. All rights reserved.</div>
     </footer>

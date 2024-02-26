@@ -85,7 +85,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`px-9 py-3 ${isHeaderFixed ? 'fixed top-0 left-0 w-full z-50 shadow-md' : ''} ${theme === 'dark' ? 'bg-dark' : 'bg-light'}`}>
+    <header className={`px-9 py-3 ${isHeaderFixed ? 'px-9 py-3 fixed top-0 left-0 w-full z-50 shadow-md' : ''} ${theme === 'dark' ? 'bg-dark' : 'bg-light'}`}>
       <nav className="flex items-center justify-between">
       <HeaderLink href="/" sectionId="home" closeMenu={closeMenu}>
       <div className="flex items-center text-xl font-bold cursor-pointer"> {/* Added flex container */}
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
             {theme === "dark" ? <FaSun /> : <FaRegMoon />}
           </button>
         </ul>
-        <div onClick={() => setHamBurger(!hamBurger)} className='cursor-pointer pr-2 text-gray-700 z-50 md:hidden'>
+        <div onClick={() => setHamBurger(!hamBurger)} className='cursor-pointer text-gray-700 z-50 md:hidden'>
           {hamBurger ? <FaTimes size={30} /> : <FaBars size={30} />}
         </div>
 
